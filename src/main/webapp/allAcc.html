@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Logo Nav - Start Bootstrap Template</title>
+
+    <!--&lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
+    <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+
+    <!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+    <!--<link href="css/logo-nav.css" rel="stylesheet">-->
+
+    <style>
+        input[type=text], select {
+
+            padding: 12px 20px;
+            display: inline-block;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: #dddddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li>
+                    <a class="nav-link" href="index.html">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="create1.html">Create an Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="edit1.html">Edit an Account</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="delete1.html">Delete an Account</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="allAcc.html">Show All</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="instruction">
+    <input type="submit" value="Get All Accounts" onclick="getall()"/>
+
+    <label for="show">Enter an account's id to see it: </label>
+    <input type="text" id="show">
+
+    <input type="submit" value="Show one account" onclick="showOne()"/>
+</div>
+
+<p id="listAll"></p>
+
+<p id="showOne"></p>
+
+<script>
+
+    var requestURL1 = 'http://localhost:8080/movieapp/api/movie/json';
+
+    var request1 = new XMLHttpRequest();
+
+    request1.open('GET' , requestURL1);
+
+    request1.responseType = 'json';
+
+    request1.send();
+
+    document.onreadystatechange = function (){
+
+        if (document.readyState === "complete"){
+
+        var movies = request1.response;
+
+        console.log (movies);
+
+        for(var i = 0; i < movies.length; i++){
+
+            document.getElementById("listAll").innerHTML += "Title: " + movies[i].title + " Genre: " + movies[i].genre + " Rating: " + movies[i].rating + "<br>";
+        }
+    }
+
+    }
+    //
+    //     var item1 = document.getElementById("show").value;
+    //
+    //
+    //     var requestURL2 = 'http://localhost:8080/accountapp/api/movie/json/'+item1+'';
+    //
+    //     var request2 = new XMLHttpRequest();
+    //
+    //     request2.open('GET', requestURL2);
+    //
+    //     request2.responseType = 'json';
+    //
+    //     request2.send();
+    //
+    // function showOne() {
+    //
+    //     var account = request2.response;
+    //
+    //     console.log(account);
+    //
+    //     document.getElementById("showOne").innerHTML += "First Name: " + account[item1].firstName + " Second Name: " + account[item1].lastName + " Account number: " + account[item1].accountNo + "<br>";
+    // }
+
+</script>
+
+</body>
+</html>
