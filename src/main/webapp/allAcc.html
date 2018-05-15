@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -83,17 +87,33 @@
     <input type="submit" value="Show one account" onclick="showOne()"/>
 </div>
 
+<div id="paypal-button"></div>
+
 <p id="listAll"></p>
 
 <p id="showOne"></p>
 
 <script>
 
+    paypal.Button.render({
+
+        env: 'production', // Or 'sandbox',
+
+        payment: function(data, actions) {
+            /* Set up the payment here */
+        },
+
+        onAuthorize: function(data, actions) {
+            /* Execute the payment here */
+        }
+
+    }, '#paypal-button');
+
     var requestURL1 = 'http://localhost:8080/movieapp/api/movie/json';
 
     var request1 = new XMLHttpRequest();
 
-    request1.open('GET' , requestURL1);
+    request1.open('GET' , requestURL1, true);
 
     request1.responseType = 'json';
 
@@ -103,9 +123,12 @@
 
         if (document.readyState === "complete"){
 
+            window.alert("fuck my life");
+
         var movies = request1.response;
 
         console.log (movies);
+
 
         for(var i = 0; i < movies.length; i++){
 
