@@ -1,0 +1,84 @@
+<div id="chart"></div>
+
+<script src="https://cdn.seats.io/chart.js"></script>
+<script>
+    new seatsio.SeatingChart({
+        divId: 'chart',
+        publicKey: '89ab0607-2506-4201-aac9-947f3327fc42',
+        event: '0d9ae045-65e2-4671-b2ee-32170c64c80e',
+
+        pricing: [
+            {'category': 3, 'ticketTypes': [
+                    {'ticketType': 'Student', 'price': 6},
+                    {'ticketType': 'Normal', 'price': 8},
+                    {'ticketType': 'OAP', 'price': 7}
+
+                ]},
+            {'category': 7, 'ticketTypes': [
+                    {'ticketType': 'Student', 'price': 11},
+                    {'ticketType': 'Normal', 'price': 13},
+                    {'ticketType': 'OAP', 'price': 12}
+                ]},
+            {'category': 8, 'ticketTypes': [
+                    {'ticketType': 'Student', 'price': 6},
+                    {'ticketType': 'Normal', 'price': 8},
+                    {'ticketType': 'OAP', 'price': 7}
+                ]}
+        ],
+
+        priceFormatter: function(price) {
+            return '£' + price;
+        },
+
+        tooltipText: function(object) {
+            if (object.status !== 'free') {
+                return 'Seat has been reserved, sorry!';
+            }
+            if(object.category.label == 'Wheelchair' && object.status == 'free'){
+
+                return 'Wheelchair seat is free to select'
+            }
+            if(object.category.label == 'Premium' && object.status == 'free'){
+
+                return 'Premium seat is free to select'
+            }
+            if(object.category.label == 'Standard' && object.status == 'free'){
+
+                return 'Standard seat is free to select'
+            }
+
+        },
+
+        // tooltipText: function(object) {
+        //     if (object.status !== 'free') {
+        //         return 'Seat has been reserved, sorry!';
+        //     } else {
+        //         return 'Free to select';
+        //     }
+        // }
+
+        // objectIcon: function(object) {
+        //     if(object.category.label === 'Wheelchair') {
+        //         return 'wheelchair';
+        //     }
+        //
+        //     if(object.category.label === 'Standard') {
+        //         return 'Standard';
+        //     }
+        //
+        //     if(object.category.label === 'Premium') {
+        //         return 'Premium';
+        //     }
+        //
+        //     else
+        //         return "wheelchair"
+        // }
+
+
+
+
+
+    }).render();
+
+
+</script>
