@@ -1,0 +1,11 @@
+<div id="event-manager"></div>
+
+<script src="https://cdn.seats.io/chart.js"></script>
+<script>
+    new seatsio.EventManager({
+        divId: 'event-manager',
+        secretKey: '8d36e669-5ed5-424c-9dec-98038f7b4807', // never expose the secret key on a public web page!
+        event: '0d9ae045-65e2-4671-b2ee-32170c64c80e',
+        mode: 'manageForSaleConfig' // only 'manageForSaleConfig' is supported for now. More to follow.
+    }).render();
+</script>
