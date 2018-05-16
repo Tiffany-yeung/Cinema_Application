@@ -17,7 +17,7 @@ import com.qa.util.JSONUtil;
 
 public class MovieDBRepository implements IMovieRepository {
 
-	private static final Logger LOGGER = Logger.getLogger(MovieDBRepository.class);
+//	private static final Logger LOGGER = Logger.getLogger(MovieDBRepository.class);
 	
 	@PersistenceContext(unitName="primary")
 	private EntityManager manager;
@@ -35,7 +35,7 @@ public class MovieDBRepository implements IMovieRepository {
 	
 	@Override
 	public String getAllMovies() {
-		LOGGER.info("MovieDBRepository getAllMovies");
+//		LOGGER.info("MovieDBRepository getAllMovies");
 		Query query = manager.createQuery("SELECT m FROM Movie m");
 		Collection<Movie> movies = (Collection<Movie>) query.getResultList();
 		return util.getJSONForObject(movies);

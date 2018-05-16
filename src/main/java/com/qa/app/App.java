@@ -7,7 +7,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		SeatingPlan seatingplan =new SeatingPlan();
-		seatingplan.bookTicket();
+		seatingplan.unbookTicket();
 
 	}
 
