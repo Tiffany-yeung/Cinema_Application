@@ -33,7 +33,9 @@
 
         tooltipText: function(object) {
             if (object.status !== 'free') {
+                console.log(object.status)
                 return 'Seat has been reserved, sorry!';
+
             }
             if(object.category.label == 'Wheelchair' && object.status == 'free'){
 
@@ -59,8 +61,35 @@
         holdOnSelect:true, //3 minutes, changeable in settings
         showLegend:true,
         legend:{hidePricing:true},
-        
-        
+        regenerateHoldToken:true,
+
+        onObjectSelected(object){
+
+            var ticket = object.selectedTicketType
+            var index
+
+            console.log(object.category.label)
+            console.log(object.label)
+            console.log(ticket)
+
+            if (ticket == "Student"){
+                index = 0
+            }
+
+            if(ticket == "Normal"){
+                index = 1
+            }
+
+            if(ticket == "OAP"){
+                index = 2
+            }
+
+            console.log(object.pricing.ticketTypes[index].price)
+
+        }
+
+
+
         /*selectionValidators: [
         *   {type: 'noOrphanSeats'},
         *    {type: 'consecutiveSeats'},

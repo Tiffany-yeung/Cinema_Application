@@ -52,4 +52,9 @@ public class MovieEndpoint {
 	public String updateMovies(String movieCorrection) {
 		return service.updateAMovie(movieCorrection);
 	}
+	
+	@POST
+	@Path("/json")
+	public void bookTicket(String [] seats) {
+	}
 }
