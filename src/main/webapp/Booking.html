@@ -49,35 +49,22 @@
 
         },
 
-        // tooltipText: function(object) {
-        //     if (object.status !== 'free') {
-        //         return 'Seat has been reserved, sorry!';
-        //     } else {
-        //         return 'Free to select';
-        //     }
-        // }
-
-        // objectIcon: function(object) {
-        //     if(object.category.label === 'Wheelchair') {
-        //         return 'wheelchair';
-        //     }
-        //
-        //     if(object.category.label === 'Standard') {
-        //         return 'Standard';
-        //     }
-        //
-        //     if(object.category.label === 'Premium') {
-        //         return 'Premium';
-        //     }
-        //
-        //     else
-        //         return "wheelchair"
-        // }
-
-
-
-
-
+        
+        /*showRowLines:true, 
+        *showRowLabels:true,
+        *These parameters look clunky when rendered but may be necessary 
+        */
+        
+        holdOnSelect:true, //3 minutes, changeable in settings
+        showLegend:true,
+        legend:{hidePricing:true},
+        
+        
+        /*selectionValidators: [
+        *   {type: 'noOrphanSeats'},
+        *    {type: 'consecutiveSeats'},
+        ]*/
+        
     }).render();
 
 
