@@ -1,19 +1,41 @@
+<html ng-app="myApp" ng-controller="myCtrl">
+    
+      <head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+
+  </head>
+    
+    <body>
+        
+
+        
+
 <div id="chart"></div>
 
 <script src="https://cdn.seats.io/chart.js"></script>
 <script src="BookingLogic.html"></script>
 <script>
+    
+
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', ['$scope', '$window', function($scope, $window) {
+      $scope.var1 = $window.price;
+    
+
+    }]);
+    
+    
     new seatsio.SeatingChart({
         divId: 'chart',
         publicKey: '89ab0607-2506-4201-aac9-947f3327fc42',
         event: '0d9ae045-65e2-4671-b2ee-32170c64c80e',
-
         pricing: [
             {'category': 3, 'ticketTypes': [
                     {'ticketType': 'Student', 'price': 6},
                     {'ticketType': 'Normal', 'price': 8},
                     {'ticketType': 'OAP', 'price': 7}
-
                 ]},
             {'category': 7, 'ticketTypes': [
                     {'ticketType': 'Student', 'price': 11},
@@ -26,31 +48,23 @@
                     {'ticketType': 'OAP', 'price': 7}
                 ]}
         ],
-
         priceFormatter: function(price) {
             return '£' + price;
         },
-
         tooltipText: function(object) {
             if (object.status !== 'free') {
                 return 'Seat has been reserved, sorry!';
-
             }
             if(object.category.label == 'Wheelchair' && object.status == 'free'){
-
                 return 'Wheelchair seat is free to select'
             }
             if(object.category.label == 'Premium' && object.status == 'free'){
-
                 return 'Premium seat is free to select'
             }
             if(object.category.label == 'Standard' && object.status == 'free'){
-
                 return 'Standard seat is free to select'
             }
-
         },
-
         
         /*showRowLines:true,
         *showRowLabels:true,
@@ -61,7 +75,6 @@
         showLegend:true,
         legend:{hidePricing:true},
         //regenerateHoldToken:true,
-
         onObjectSelected(object){
             
             var ticket = object.selectedTicketType
@@ -71,19 +84,15 @@
             console.log(object.label)
             console.log(object.selectedTicketType)
           
-
             if (ticket == "Student"){
                 index = 0
             }
-
             if(ticket == "Normal"){
                 index = 1
             }
-
             if(ticket == "OAP"){
                 index = 2
             }
-
             console.log(object.pricing.ticketTypes[index].price)
             
             
@@ -97,19 +106,15 @@
         onObjectDeselected(object){
             var ticket = object.selectedTicketType
             var index          
-
             if (ticket == "Student"){
                 index = 0
             }
-
             if(ticket == "Normal"){
                 index = 1
             }
-
             if(ticket == "OAP"){
                 index = 2
             }
-
             console.log(object.pricing.ticketTypes[index].price)
             
             
@@ -138,16 +143,18 @@
     
     var selectedTickets=[];
     var price = 0;
+   
+    document.getElementById("amount").value = price;
     
     function createTicket(x){
-
         price = price + x.price;
         var ticket = JSON.stringify(x)
         selectedTickets.push(ticket);
         window.alert("your ticket is: "+ticket)
         window.alert("All tickets are:  "+selectedTickets)
         console.log(price);
-
+        
+        document.getElementById("amount").value = price;
         
     }
     function removeTicket(x){
@@ -158,21 +165,27 @@
             if(selectedTickets[i] === ticket) {
                 selectedTickets.splice(i,1);
                 console.log(price);
-
                 
             }
         }
+        
+        document.getElementById("amount").value = price;
     }
-
 </script>
+        
+        
+        
+    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_cart">
+        <input type="hidden" name="upload" value="1">
+        <input type="hidden" name="return" value="http://localhost/Frontend/{{selectedCar}}.html">
+        <input type="hidden" name="business" value="nick_morgan_@hotmail.com">
+        <input type="hidden" name="item_name_1" value="Item Name 1">
+        <INPUT TYPE="hidden" NAME="currency_code" value="GBP">
+        <input id = "amount" type="hidden" name="amount_1">
+        <input type="submit" value="PayPal">
+    </form>
 
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-    <input type="hidden" name="cmd" value="_cart">
-    <input type="hidden" name="upload" value="1">
-
-    <input type="hidden" name="business" value="nick_morgan_@hotmail.com">
-    <input type="hidden" name="item_name_1" value="Item Name 1">
-    <INPUT TYPE="hidden" NAME="currency_code" value="GBP">
-    <input id = "amount" type="hidden" name="amount_1" value="price">
-    <input type="submit" value="PayPal">
-</form>​
+    </body>
+        
+</html>
