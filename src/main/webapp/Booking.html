@@ -33,7 +33,6 @@
 
         tooltipText: function(object) {
             if (object.status !== 'free') {
-                console.log(object.status)
                 return 'Seat has been reserved, sorry!';
 
             }
@@ -61,16 +60,17 @@
         holdOnSelect:true, //3 minutes, changeable in settings
         showLegend:true,
         legend:{hidePricing:true},
-        regenerateHoldToken:true,
+        //regenerateHoldToken:true,
 
         onObjectSelected(object){
-
+            
             var ticket = object.selectedTicketType
             var index
-
+            
             console.log(object.category.label)
             console.log(object.label)
-            console.log(ticket)
+            console.log(object.selectedTicketType)
+          
 
             if (ticket == "Student"){
                 index = 0
@@ -85,11 +85,39 @@
             }
 
             console.log(object.pricing.ticketTypes[index].price)
+            
+            
+           
+            var ticket=new Ticket(object.category.label,object.selectedTicketType,object.label, object.pricing.ticketTypes[index].price)
+            object.holdOnSelect
+            createTicket(ticket);
+           
+        },
+        
+        onObjectDeselected(object){
+            var ticket = object.selectedTicketType
+            var index          
 
-        }
+            if (ticket == "Student"){
+                index = 0
+            }
 
+            if(ticket == "Normal"){
+                index = 1
+            }
 
+            if(ticket == "OAP"){
+                index = 2
+            }
 
+            console.log(object.pricing.ticketTypes[index].price)
+            
+            
+           var ticket=new Ticket(object.category.label,object.selectedTicketType,object.label, object.pricing.ticketTypes[index].price)
+           removeTicket(ticket);
+            
+        },      
+        
         /*selectionValidators: [
         *   {type: 'noOrphanSeats'},
         *    {type: 'consecutiveSeats'},
@@ -97,6 +125,36 @@
         
     }).render();
     
+    class Ticket{
+        constructor(seatId,seatCat,customerCat,price){
+            this.seatId=seatId;
+            this.seatCat=seatCat;
+            this.customerCat=customerCat;
+            this.price=price;
+            
+            
+        }
+    }
     
+    var selectedTickets=[];
+    
+    function createTicket(x){
+        var ticket = JSON.stringify(x)
+        selectedTickets.push(ticket);
+        window.alert("your ticket is: "+ticket)
+        window.alert("All tickets are:  "+selectedTickets)
+        
+    }
+    function removeTicket(x){
+        var ticket = JSON.stringify(x)
+        
+        for(var i =0;i<selectedTickets.length ; i++) {
+            if(selectedTickets[i] === ticket) {
+                selectedTickets.splice(i,1);
+                
+            }
+        }
+    }
 
 </script>
+<input type=button value="Buy Now" onclick="createTicket()">
