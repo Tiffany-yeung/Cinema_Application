@@ -1,30 +1,10 @@
-<html ng-app="myApp" ng-controller="myCtrl">
-    
-      <head>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
-
-  </head>
-    
-    <body>
-        
-
-        
 
 <div id="chart"></div>
 
 <script src="https://cdn.seats.io/chart.js"></script>
 <script src="BookingLogic.html"></script>
 <script>
-    
 
-    var app = angular.module('myApp', []);
-
-    app.controller('myCtrl', ['$scope', '$window', function($scope, $window) {
-      $scope.var1 = $window.price;
-    
-
-    }]);
     
     
     new seatsio.SeatingChart({
@@ -118,7 +98,7 @@
             console.log(object.pricing.ticketTypes[index].price)
             
             
-           var ticket=new Ticket(object.category.label,object.selectedTicketType,object.label, object.pricing.ticketTypes[index].price)
+           var ticket=new Ticket(object.label,object.category.label,object.selectedTicketType, object.pricing.ticketTypes[index].price)
             var seatIDs = new SeatIDs (object.label)
            removeTicket(ticket);
             
@@ -179,28 +159,26 @@
 
     function book(){
 
-        var requestURL1 = 'https://app.seats.io/api/book/';
+        var requestURL1 = 'https://app.seats.io/api/book';
 
         var request1 = new XMLHttpRequest();
 
-        request1.open('POST' , requestURL1);
+        request1.open('POST',requestURL1,true);
 
-        request1.setRequestHeader("Content-type", "application/json");
+        request1.setRequestHeader('Content-Type', 'application/json');
 
-    var data = JSON.stringify({
-        'objects': ['A-3', 'A-5', 'A-7'],
-        'eventKey': '0d9ae045-65e2-4671-b2ee-32170c64c80e',
-        'secretKey': '8d36e669-5ed5-424c-9dec-98038f7b4807'
-    })
-
+        var data = JSON.stringify({
+                'objects': ['W-3'],
+                'eventKey': '0d9ae045-65e2-4671-b2ee-32170c64c80e',
+                'secretKey': '8d36e669-5ed5-424c-9dec-98038f7b4807'
+                })
+        
         request1.send(data)
     }
 
-
-
 </script>
 
-<input type="submit" value="Book" onclick="book()"/>
+<input type="submit" value="Book" onclick="book()">
         
     <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_cart">
@@ -213,6 +191,4 @@
         <input type="submit" value="PayPal">
     </form>
 
-    </body>
-        
-</html>
+
