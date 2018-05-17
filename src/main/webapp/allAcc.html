@@ -1,166 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://www.paypalobjects.com/api/checkout.js"></script>
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+        <meta name="description" content="">
+        <meta name="author" content="">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Logo Nav - Start Bootstrap Template</title>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    </head>
 
-    <!--&lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
-    <!--<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+    <script>
+        var requestURL1 = 'http://localhost:8080/movieapp/api/movie/json';
+        var request1 = new XMLHttpRequest();
+        request1.open('GET' , requestURL1, true);
+        request1.responseType = 'json';
+        request1.send();
 
-    <!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
-    <!--<link href="css/logo-nav.css" rel="stylesheet">-->
-
-    <style>
-        input[type=text], select {
-
-            padding: 12px 20px;
-            display: inline-block;
-            border: 1px solid #000000;
-            border-radius: 4px;
-            box-sizing: border-box;
+        window.document.onreadystatechange = function (){
+            if (document.readyState === "complete"){
+                var movies = request1.response;
+                console.log (movies);
+                for(var i = 0; i < movies.length; i++){
+                    document.getElementById("listAll").innerHTML += "Title: " + movies[i].title + " Genre: " + movies[i].genre + " Rating: " + movies[i].rating + "<br>";
+                }
+                for(var i=0; i<movies.length; i++){
+                    var movieThumbnail = document.createElement("h5");
+                    var node = document.createTextNode(movies[i].title);
+                    movieThumbnail.appendChild(node);
+                    
+                    var element = document.getElementById("thumbnail");
+                        element.appendChild(movieThumbnail);
+                }
+            }
         }
+    </script>
 
-        input[type=submit] {
+    <body>
+        <p id="listAll"></p>
 
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: #dddddd;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+        <section class = "contain" style="background-color: #363738">
 
-        input[type=submit]:hover {
-            background-color: #45a049;
-        }
+            <h2>Hot Movies</h2><br>
+            
+                    <div id="thumbnail">
+                    </div>
 
-    </style>
-</head>
-<body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li>
-                    <a class="nav-link" href="index.html">Home
-                        <span class="sr-only">(current)</span>
+            <div class="row text-center text-lg-left">
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <h5 style="text-align: center">Deadpool 2</h5>
+                    <a href="#" class="d-block mb-4 h-100">
+                        <img id="roundedcorners" class="img-fluid" src="images/movieImage.jpg" alt="">
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="create1.html">Create an Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="edit1.html">Edit an Account</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="delete1.html">Delete an Account</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="allAcc.html">Show All</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <h5 style="text-align: center">Deadpool 2</h5>
+                    <a href="#" class="d-block mb-4 h-100">
+                        <img id="roundedcorners" class="img-fluid" src="images/movieImage.jpg" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6">
+                    <h5 style="text-align: center">Deadpool 2</h5>
+                    <a href="#" class="d-block mb-4 h-100">
+                        <img id="roundedcorners" class="img-fluid" src="images/movieImage.jpg" alt="">
+                    </a>
+                </div>
+            </div>
+        </section>
 
-<div class="instruction">
-    <input type="submit" value="Get All Accounts" onclick="getall()"/>
-
-    <label for="show">Enter an account's id to see it: </label>
-    <input type="text" id="show">
-
-    <input type="submit" value="Show one account" onclick="showOne()"/>
-</div>
-
-<div id="paypal-button"></div>
-
-<p id="listAll"></p>
-
-<p id="showOne"></p>
-
-<script>
-
-    paypal.Button.render({
-
-        env: 'production', // Or 'sandbox',
-
-        payment: function(data, actions) {
-            /* Set up the payment here */
-        },
-
-        onAuthorize: function(data, actions) {
-            /* Execute the payment here */
-        }
-
-    }, '#paypal-button');
-
-    var requestURL1 = 'http://localhost:8080/movieapp/api/movie/json';
-
-    var request1 = new XMLHttpRequest();
-
-    request1.open('GET' , requestURL1, true);
-
-    request1.responseType = 'json';
-
-    request1.send();
-
-    document.onreadystatechange = function (){
-
-        if (document.readyState === "complete"){
-
-            window.alert("fuck my life");
-
-        var movies = request1.response;
-
-        console.log (movies);
-
-
-        for(var i = 0; i < movies.length; i++){
-
-            document.getElementById("listAll").innerHTML += "Title: " + movies[i].title + " Genre: " + movies[i].genre + " Rating: " + movies[i].rating + "<br>";
-        }
-    }
-
-    }
-    //
-    //     var item1 = document.getElementById("show").value;
-    //
-    //
-    //     var requestURL2 = 'http://localhost:8080/accountapp/api/movie/json/'+item1+'';
-    //
-    //     var request2 = new XMLHttpRequest();
-    //
-    //     request2.open('GET', requestURL2);
-    //
-    //     request2.responseType = 'json';
-    //
-    //     request2.send();
-    //
-    // function showOne() {
-    //
-    //     var account = request2.response;
-    //
-    //     console.log(account);
-    //
-    //     document.getElementById("showOne").innerHTML += "First Name: " + account[item1].firstName + " Second Name: " + account[item1].lastName + " Account number: " + account[item1].accountNo + "<br>";
-    // }
-
-</script>
-
-</body>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </body>
 </html>
