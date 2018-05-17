@@ -52,7 +52,7 @@
         },
 
         
-        /*showRowLines:true, 
+        /*showRowLines:true,
         *showRowLabels:true,
         *These parameters look clunky when rendered but may be necessary 
         */
@@ -137,24 +137,42 @@
     }
     
     var selectedTickets=[];
+    var price = 0;
     
     function createTicket(x){
+
+        price = price + x.price;
         var ticket = JSON.stringify(x)
         selectedTickets.push(ticket);
         window.alert("your ticket is: "+ticket)
         window.alert("All tickets are:  "+selectedTickets)
+        console.log(price);
+
         
     }
     function removeTicket(x){
+        price = price - x.price
         var ticket = JSON.stringify(x)
         
         for(var i =0;i<selectedTickets.length ; i++) {
             if(selectedTickets[i] === ticket) {
                 selectedTickets.splice(i,1);
+                console.log(price);
+
                 
             }
         }
     }
 
 </script>
-<input type=button value="Buy Now" onclick="createTicket()">
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_cart">
+    <input type="hidden" name="upload" value="1">
+
+    <input type="hidden" name="business" value="nick_morgan_@hotmail.com">
+    <input type="hidden" name="item_name_1" value="Item Name 1">
+    <INPUT TYPE="hidden" NAME="currency_code" value="GBP">
+    <input id = "amount" type="hidden" name="amount_1" value="price">
+    <input type="submit" value="PayPal">
+</form>​
