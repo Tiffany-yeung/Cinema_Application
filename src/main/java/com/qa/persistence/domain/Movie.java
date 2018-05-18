@@ -17,15 +17,17 @@ public class Movie {
 	private String title;
 	private String genre;
 	private String rating;
+	private String imageURL;
 	
 	//constructors
 	public Movie() {
 	}
 	
-	public Movie(String title, String genre, String rating) {
+	public Movie(String title, String genre, String rating, String imageURL) {
 		this.title = title;
 		this.genre = genre;
 		this.rating = rating;
+		this.imageURL = imageURL;
 	}
 
 	//getters and setters
@@ -56,5 +58,13 @@ public class Movie {
 
 	public void setRating(String rating) {
 		this.rating = rating;
+	}
+	
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 }

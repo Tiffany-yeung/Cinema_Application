@@ -29,15 +29,15 @@
                 var movies = request1.response;
                 console.log (movies);
                 for(var i = 0; i < movies.length; i++){
-                    document.getElementById("listAll").innerHTML += "Title: " + movies[i].title + " Genre: " + movies[i].genre + " Rating: " + movies[i].rating + "<br>";
+                    document.getElementById("listAll").innerHTML += "Title: " + movies[i].title + " Genre: " + movies[i].genre + " Rating: " + movies[i].rating + " Image URL: " + movies[i].imageURL + "<br>";
                 }
                 for(var i=0; i<movies.length; i++){
-                    var movieThumbnail = document.createElement("h5");
-                    var node = document.createTextNode(movies[i].title);
-                    movieThumbnail.appendChild(node);
+                    var movieTitle = document.createElement("h5");
+                    var content = document.createTextNode(movies[i].title);
+                    movieTitle.appendChild(content);
                     
                     var element = document.getElementById("thumbnail");
-                        element.appendChild(movieThumbnail);
+                        element.appendChild(movieTitle);
                 }
             }
         }
@@ -50,8 +50,7 @@
 
             <h2>Hot Movies</h2><br>
             
-                    <div id="thumbnail">
-                    </div>
+                    <div id="thumbnail"></div>
 
 
             <div class="row text-center text-lg-left">

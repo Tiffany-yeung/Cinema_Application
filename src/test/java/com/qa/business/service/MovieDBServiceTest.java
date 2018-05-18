@@ -34,8 +34,8 @@ public class MovieDBServiceTest {
 
 	private JSONUtil jsonUtil = new JSONUtil();
 
-	private static final String MOCK_LIST = "[{\"title\":\"Life of Nabeel\",\"genre\":\"horror\",\"rating\":\"18\"}]";
-	private static final String MOCK_OBJECT = "{\"title\":\"Life of Nabeel\",\"genre\":\"horror\",\"rating\":\"18\"}";
+	private static final String MOCK_LIST = "[{\"title\":\"Life of Nabeel\",\"genre\":\"horror\",\"rating\":\"18\",\"imageURL\":\"https://ia.media-imdb.com/images/M/MV5BZDE1NjFkZmMtNGY1MC00OGFlLWFiY2MtODZlZWIyZmRkOTJiXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg\"}]";
+	private static final String MOCK_OBJECT = "{\"title\":\"Life of Nabeel\",\"genre\":\"horror\",\"rating\":\"18\",\"imageURL\":\"https://ia.media-imdb.com/images/M/MV5BZDE1NjFkZmMtNGY1MC00OGFlLWFiY2MtODZlZWIyZmRkOTJiXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg\"}";
 
 	@Before
 	public void testInit() {
@@ -66,7 +66,7 @@ public class MovieDBServiceTest {
 	public void getAllMovies() {
 		Mockito.when(manager.createQuery(Mockito.anyString())).thenReturn(query);
 		List<Movie> movies = new ArrayList<Movie>();
-		movies.add(new Movie("Life of Nabeel", "horror", "18"));
+		movies.add(new Movie("Life of Nabeel", "horror", "18", "https://ia.media-imdb.com/images/M/MV5BZDE1NjFkZmMtNGY1MC00OGFlLWFiY2MtODZlZWIyZmRkOTJiXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SX300.jpg"));
 		Mockito.when(query.getResultList()).thenReturn(movies);
 		assertEquals(MOCK_LIST, repo.getAllMovies());
 	}
