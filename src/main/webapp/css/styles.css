@@ -1,0 +1,77 @@
+body {
+    font-family: 'Raleway', sans-serif;
+    background-color: #dd1c1c;
+  }
+
+section{
+  margin: 0;
+}
+
+h2{
+  margin: 0;
+  color: white;
+}
+
+h5{
+  color: white;
+}
+
+
+h4{
+  color: white;
+  margin: 0;
+}
+
+p{
+  margin: 0;
+  color: white;
+}
+
+div{
+  margin: 0;
+
+}
+
+.center{
+  text-align: center;
+}
+
+.social{
+    width: 4%;
+    height: auto;
+    left: 0px;
+    right: 0px;
+    padding-left:2em;
+}
+
+.classification{
+  color: white;
+}
+
+.title{
+  color: white;
+}
+
+span {
+    color: white;
+}
+
+
+.contain{
+  padding: 2%;
+}
+
+#map{
+  height: 80%;
+  width: 100%;
+}
+
+
+#roundedcorners {
+    border-radius: 7px;
+}
+
+
+.roundedcorners{
+  border-radius: 7px;
+}
