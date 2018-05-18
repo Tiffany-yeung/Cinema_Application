@@ -33,11 +33,15 @@
                 }
                 for(var i=0; i<movies.length; i++){
                     var movieTitle = document.createElement("h5");
-                    var content = document.createTextNode(movies[i].title);
-                    movieTitle.appendChild(content);
+                    var actualTitle = document.createTextNode(movies[i].title);
+                    movieTitle.appendChild(actualTitle);
                     
-                    var element = document.getElementById("thumbnail");
-                        element.appendChild(movieTitle);
+                    var movieImageURL = document.createElement("img");
+                    movieImageURL.setAttribute('src', movies[i].imageURL);
+                        
+                    var movieThumbnail = document.getElementById("thumbnail");
+                        movieThumbnail.appendChild(movieTitle);
+                        movieThumbnail.appendChild(movieImageURL);
                 }
             }
         }
