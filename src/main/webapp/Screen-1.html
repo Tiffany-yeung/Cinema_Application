@@ -1,0 +1,119 @@
+<div id="chart"></div>
+<script src="https://cdn.seats.io/chart.js"></script>
+
+<script>    
+    new seatsio.SeatingChart({
+        divId: 'chart',
+        publicKey: '89ab0607-2506-4201-aac9-947f3327fc42',
+        event: 'Screen-1',
+        
+    pricing: [
+            {'category': 3, 'ticketTypes': [
+                    {'ticketType': 'Child (0-14)', 'price': 4},
+                    {'ticketType': 'Junior (15-17)', 'price':5 },
+                    {'ticketType': 'Student (18+)', 'price': 6},
+                    {'ticketType': 'Adult 18+', 'price': 8},
+                    {'ticketType': 'Senior Citizen', 'price': 7}
+                ]},
+            {'category': 7, 'ticketTypes': [
+                   {'ticketType': 'Child (0-14)', 'price': 9},
+                    {'ticketType': 'Junior (15-17)', 'price': 11},
+                    {'ticketType': 'Student (18+)', 'price': 12},
+                    {'ticketType': 'Adult (18+)', 'price': 15},
+                    {'ticketType': 'Senior Citizen', 'price': 13}
+                ]},
+            {'category': 8, 'ticketTypes': [
+                    {'ticketType': 'Child (0-14)', 'price': 7},
+                    {'ticketType': 'Junior (15-17)', 'price':8 },
+                    {'ticketType': 'Student (18+)', 'price': 9},
+                    {'ticketType': 'Adult (18+)', 'price': 12},
+                    {'ticketType': 'Senior Citizen', 'price': 11}
+                ]},
+        ],
+    
+    priceFormatter: function(price) {
+            return '£' + price;
+    },
+    
+    tooltipText: function(object) {
+            if (object.status !== 'free') {
+                return 'Sorry seat is unavailable';
+            }
+            if(object.category.label == 'Wheelchair' && object.status == 'free'){
+                return 'Wheelchair seat is available for selection'
+            }
+            if(object.category.label == 'Premium' && object.status == 'free'){
+                return 'Premium seat is available for selection'
+            }
+            if(object.category.label == 'Standard' && object.status == 'free'){
+                return 'Standard seat is available for selection'
+            }
+        },
+        
+    showRowLabels:true,
+    holdOnSelect:true, 
+    showLegend:true,
+    legend:{hidePricing:true},
+    
+    onObjectSelected(object){
+            
+            var index=3
+            var ticket = object.selectedTicketType
+          
+            if (ticket == "Child (0-14)"){
+                index = 0
+            }
+            if (ticket == "Junior (15-17)"){
+                index = 1
+            }
+            if (ticket == "Student (18+)"){
+                index = 2
+            }
+            if(ticket == "Adult (18+)"){
+                index = 3
+            }
+            if(ticket == "Senior Citizen"){
+                index = 4
+            }
+
+    var ticket=new Ticket(object.label,object.category.label,object.selectedTicketType,object.pricing.ticketTypes[index].price)
+    object.holdOnSelect
+    //createTicket(ticket);
+    
+    }, 
+    
+//    onObjectDeselected(object){
+//            var ticket = object.selectedTicketType
+//            var index          
+//            if (ticket == "Student"){
+//                index = 0
+//            }
+//            if(ticket == "Normal"){
+//                index = 1
+//            }
+//            if(ticket == "OAP"){
+//                index = 2
+//            }
+//            console.log(object.pricing.ticketTypes[index].price)
+//            
+//            
+//           var ticket=new Ticket(object.label,object.category.label,object.selectedTicketType, object.pricing.ticketTypes[index].price)
+//            var seatIDs = new SeatIDs (object.label)
+//           removeTicket(ticket);
+//            
+//        },      
+        
+
+        
+    }).render();
+    
+      class Ticket{
+        constructor(seatId,seatCat,customerCat,ticketPrice){
+            this.seatId=seatId;
+            this.seatCat=seatCat;
+            this.customerCat=customerCat;
+            this.ticketPrice=ticketPrice;
+        }
+    } 
+        
+</script>
