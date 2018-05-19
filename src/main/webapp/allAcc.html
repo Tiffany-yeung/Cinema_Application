@@ -32,23 +32,29 @@
                 }
                 for(var i=0; i<movies.length; i++){
                     var movieTitle = document.createElement("h5");
-                    //movieTitle.setAttribute("style", "text-align: center");
                     var actualTitle = document.createTextNode(movies[i].title);
-                    movieTitle.appendChild(actualTitle);
+                        movieTitle.appendChild(actualTitle);
                     
                     var movieImageURL = document.createElement("img");
-                    movieImageURL.classList.add("roundedcorners");
-                    movieImageURL.classList.add("img-fluid");
-                    movieImageURL.setAttribute('src', movies[i].imageURL);
+                        movieImageURL.classList.add("roundedcorners");
+                        movieImageURL.classList.add("img-fluid");
+                        movieImageURL.setAttribute('src', movies[i].imageURL);
                         
+                    var imageSize = document.createElement("a");
+                        imageSize.classList.add("d-block");
+                        imageSize.classList.add("mb-4");
+                        imageSize.classList.add("h-100");
+                        imageSize.setAttribute('href', "#");
+                        imageSize.appendChild(movieImageURL);
+                    
                     var movieOneBlock = document.createElement("div");
                         movieOneBlock.classList.add("col-lg-3");
                         movieOneBlock.classList.add("col-md-4");
                         movieOneBlock.classList.add("col-xs-6");
                         movieOneBlock.appendChild(movieTitle);
-                        movieOneBlock.appendChild(movieImageURL);
+                        movieOneBlock.appendChild(imageSize);
                     
-                    var movieBlocks = document.getElementById("blocks");
+                    var movieBlocks = document.getElementById("hotMovies");
                         movieBlocks.appendChild(movieOneBlock);
                 }
             }
@@ -62,14 +68,8 @@
 
             <h2>Hot Movies</h2><br>
 
-            <div id="blocks" class="row text-center text-lg-center"></div>
+            <div id="hotMovies" class="row text-center text-lg-center"></div>
                 
-<!--
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div id="thumbnail"></div>
-                </div>
--->
-               
                 
 <!--
                 <div class="col-lg-3 col-md-4 col-xs-6">
